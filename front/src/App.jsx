@@ -27,7 +27,7 @@ function App() {
     <Router>
       <main className="app">
         <Routes>
-          <Route exact path="/smth" component={SignUp} />
+          <Route exact path="/" component={SignUp} />
         //  <Route exact path="/product/:id" component={ProductScreen} />
           //<Route exact path="/cart" component={CartScreen} />
           //<Route exact path="/signup" component={SignUp} />
