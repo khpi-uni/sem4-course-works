@@ -34,7 +34,7 @@ services:
       - MYSQL_ROOT_PASSWORD=5g@&Okn9Yz7856u!
       - MYSQL_DATABASE=app_db
       - MYSQL_USER=db_user
-      - MYSQL_PASSWORD=St*TQ9we2$1m08Qm
+      - MYSQL_PASSWORD=St*TQ9we21m08Qm
       - MYSQL_ROOT_HOST=%
     ports:
       - 3306:3306
