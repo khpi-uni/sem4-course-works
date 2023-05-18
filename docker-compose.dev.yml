@@ -1,0 +1,61 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile_DEV
+    ports:
+      - 80:4444
+    volumes:
+      - ./front:/app
+      - /front/node_modules
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile_DEV
+    ports:
+      - 3000:3000
+    volumes:
+      - ./back:/app
+      - /back/node_modules
+    depends_on:
+      - database
+    networks:
+      - app_network
+
+  database:
+    image: mysql:5.7.42
+    environment:
+      - MYSQL_ROOT_PASSWORD=5g@&Okn9Yz7856u!
+      - MYSQL_DATABASE=app_db
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=St*TQ9we21m08Qm
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/course-work:/var/lib/mysql
+    networks:
+      - app_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=5g@&Okn9Yz7856u!
+    ports:
+      - 8081:80
+    depends_on:
+      - database
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
