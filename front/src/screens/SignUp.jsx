@@ -1,10 +1,13 @@
 import "./SignUp.css";
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export default function SignUp() {
-  <div>
+  return (<div>
+   <p></p> 
+    <Button>Hello world!</Button>
     <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
-  </div>  
+  </div>  );
 };
   
 

@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import {useEffect, useState} from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -23,17 +22,20 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <div id="root">
+      
     <Router>
       <main className="app">
-        <Switch>
-          <Route exact path="/" component={SignUp} />
+        <Routes>
+          <Route exact path="/smth" component={SignUp} />
         //  <Route exact path="/product/:id" component={ProductScreen} />
           //<Route exact path="/cart" component={CartScreen} />
           //<Route exact path="/signup" component={SignUp} />
           //<Route exact path="/signin" component={SignIn} />
-        </Switch>
+        </Routes>
       </main>
     </Router>
+    </div>
   )
 }
 
