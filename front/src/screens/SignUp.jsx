@@ -7,8 +7,6 @@ const SignUp = () => {
   return (<div>
    <p></p> 
     <Navbar/>
-    <Button>Hello world!</Button>
-    <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
   </div>  );
 };
 
