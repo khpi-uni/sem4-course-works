@@ -1,31 +1,39 @@
 import { useState } from 'react'
+import {useEffect, useState} from 'react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+
+/*
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+
+import HomeScreen from './screens/HomeScreen'
+import ProductScreen from './screens/ProductScreen'
+import CartScreen from './screens/CartScreen'
+import SignIn from './screens/SignIn'
+import CheckoutScreen from './screens/CheckoutScreen' 
+*/
+//admin screens
+//
+import SignUp from './screens/SignUp'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      <p className="read-the-docs">a
-        Click on the Vite and React logos to learn more!!!!!a!!!!
-      </p>
-    </>
+    <Router>
+      <main className="app">
+        <Switch>
+          <Route exact path="/" component={SignUp} />
+        //  <Route exact path="/product/:id" component={ProductScreen} />
+          //<Route exact path="/cart" component={CartScreen} />
+          //<Route exact path="/signup" component={SignUp} />
+          //<Route exact path="/signin" component={SignIn} />
+        </Switch>
+      </main>
+    </Router>
   )
 }
 
