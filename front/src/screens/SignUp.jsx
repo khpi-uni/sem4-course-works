@@ -1,13 +1,13 @@
 import "./SignUp.css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Navbar from '../components/Navbar';
 
-export default function SignUp() {
+const SignUp = () => {
   return (<div>
    <p></p> 
-    <Button>Hello world!</Button>
-    <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
+    <Navbar/>
   </div>  );
 };
-  
 
+export default SignUp; 
