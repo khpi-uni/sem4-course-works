@@ -36,17 +36,17 @@ const ExpandMore = styled((props) => {
 
 const Order = (props) =>{
   const data = props.json_array;
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(0);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = (i) => {
+    setExpanded(i);
   };
   return (
 <div>
   
     {
       data.length?(
-        data.map(el=>(
+        data.map((el,i)=>(
 
       <Card sx={{padding: "1em 0.5em"}}>
         <Box sx={{display:"flex",flexDirection:"row",flexGrow:"1"}}>
@@ -66,8 +66,8 @@ const Order = (props) =>{
           <ShareIcon />
         </IconButton>
         <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
+          expand={expanded===i}
+          onClick={()=>handleExpandClick(i)}
           aria-expanded={expanded}
           aria-label="show more"
         >
