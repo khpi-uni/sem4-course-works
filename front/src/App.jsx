@@ -17,6 +17,7 @@ import CheckoutScreen from './screens/CheckoutScreen'
 //admin screens
 //
 import SignUp from './screens/SignUp'
+import Account from './screens/Account'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
     <Router>
       <main className="app">
         <Routes>
+          <Route exact path="/account" element={<Account/>} />
           <Route exact path="/" element={<SignUp/>} />
         </Routes>
       </main>

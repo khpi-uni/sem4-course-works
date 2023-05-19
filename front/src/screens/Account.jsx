@@ -1,4 +1,4 @@
-import "./SignUp.css";
+import "./Account.css";
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
