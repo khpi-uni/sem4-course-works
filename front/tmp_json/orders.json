@@ -2,6 +2,7 @@
   "orders":[
     {
       "order_date": "2023-03-13",
+      "total":"30.00",
       "items": [
         {
           "price": "30.00",
