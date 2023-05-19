@@ -1,6 +1,3 @@
-// src/componetns/Footer.tsx
-
-import React, { FC, ReactElement } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 
 const Footer = ()=> {
@@ -10,7 +7,7 @@ const Footer = ()=> {
         width: "100%",
         height: "auto",
         backgroundColor: "secondary.light",
-        paddingTop: "1rem",
+        paddingTop: "0.5rem",
 
         position:"absolute",
         bottom:0,

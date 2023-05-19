@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import Navbar from '../components/Navbar';
-
+import Footer from '../components/Footer';
 
 import * as React from 'react';
 
@@ -32,7 +32,11 @@ const SignUp = ()=>{
     <Button variant="contained"
     sx={{margin:"1em"  }}
     >Sign up</Button>
+    <Typography mt="1em" component="a" href="signin" sx={{textDecoration:"none",color:"grey"}}>{"Have an account? Sign in"}</Typography>
     </Container>
+
+
+    <Footer/>
     </div>
   );
 }
