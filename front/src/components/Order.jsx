@@ -39,6 +39,8 @@ const Order = (props) =>{
   const [expanded, setExpanded] = React.useState(0);
 
   const handleExpandClick = (i) => {
+    console.log(i);
+    console.log(expanded);
     setExpanded(i);
   };
   return (
@@ -66,7 +68,7 @@ const Order = (props) =>{
           <ShareIcon />
         </IconButton>
         <ExpandMore
-          expand={expanded===i}
+          expand={(expanded==i)}
           onClick={()=>handleExpandClick(i)}
           aria-expanded={expanded}
           aria-label="show more"
@@ -74,7 +76,7 @@ const Order = (props) =>{
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded==i} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography>lots of content</Typography>
         </CardContent>
