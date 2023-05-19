@@ -1,6 +1,7 @@
 
 import "./Order.css";
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 
 import * as React from 'react';
@@ -83,7 +84,13 @@ const Order = (props) =>{
         </Card>
         ))
       )
-        :"loading"
+        :
+      <Container maxWidth="sm"> 
+
+      <Card sx={{padding:"9em 1em",textAlign:"center"}}> 
+        <Typography variant="h5">There are currently no orders!</Typography>
+      </Card>
+      </Container>
   }
 
 </div>
