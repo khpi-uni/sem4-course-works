@@ -23,6 +23,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
+
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -37,6 +45,7 @@ const ExpandMore = styled((props) => {
 
 const Order = (props) =>{
   const data = props.json_array;
+  console.log(data);
   const [expanded, setExpanded] = React.useState(0);
 
   const handleExpandClick = (i) => {
@@ -77,7 +86,21 @@ const Order = (props) =>{
       </CardActions>
       <Collapse in={expanded==i} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography>lots of content</Typography>
+                  <List>
+          {
+           el.items.map((el,j)=>(
+          <ListItem key={el}>
+            <ListItemButton sx={{padding:"2em"}}>
+             <Typography sx={{fontsize:"0.75em"}}>{el.product_title}</Typography>
+             <ListItemText primary={el.price} />
+            </ListItemButton>
+          </ListItem>
+
+           )) 
+          
+          }
+            </List>
+
         </CardContent>
       </Collapse>
 
