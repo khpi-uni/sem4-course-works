@@ -51,7 +51,7 @@ const Forms = ()=>{
 }
 
 
-const SignUp = () => {
+const Account = () => {
   return (
 
     <div>
@@ -69,4 +69,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp; 
+export default Account; 
