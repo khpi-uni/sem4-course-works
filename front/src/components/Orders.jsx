@@ -20,19 +20,8 @@ async function parseJson(){
   return data.orders;
 }
 
-function renderRow(props) {
-  const { index, style } = props;
 
-  return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        <ListItemText primary={`Item ${index + 1}`} />
-      </ListItemButton>
-    </ListItem>
-  );
-}
-
-function ResponsiveGrid() {
+const Orders = () =>{
 
    const [data, setData] = useState(0);
 
@@ -52,15 +41,6 @@ function ResponsiveGrid() {
     </Container>
   );
     //    {data.length?data.map(el=><p>el</p>):<p>loading...</p>}
-}
-
-const Orders = () =>{
-  return (
-    <ResponsiveGrid/>
-  );
-
-
-   
 }
 
 export default Orders; 
