@@ -17,6 +17,7 @@ import CheckoutScreen from './screens/CheckoutScreen'
 //admin screens
 //
 import SignUp from './screens/SignUp'
+import SignIn from './screens/SignIn'
 import Account from './screens/Account'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route exact path="/account" element={<Account/>} />
           <Route exact path="/" element={<SignUp/>} />
+          <Route exact path="/signin" element={<SignIn/>} />
         </Routes>
       </main>
     </Router>
