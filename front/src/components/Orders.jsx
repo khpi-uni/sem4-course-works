@@ -8,6 +8,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
+
+import Container from '@mui/material/Container';
+
+import Order from './Order'
+
 async function parseJson(){
   const data = await fetch("../../tmp_json/orders.json").then((response)=>response.json());
 
@@ -42,27 +47,9 @@ function ResponsiveGrid() {
    };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {JSON.stringify(data)}    
-    {
-      data.length?(
-        data.map(el=>(
-
-      <Card>
-        <Box sx={{display:"flex",flexDirection:"row",flexGrow:"1"}}>
-      <Box sx={{alignSelf:"start",flexGrow:"1"}}>
-        {el.order_date}
-      </Box>
-      <Box sx={{justifySelf:"end",}}>
-        {el.total}
-      </Box>
-      </Box>
-        </Card>
-        ))
-      )
-        :"loading"
-    }
-    </Box>
+    <Container maxWidth="sm">
+    <Order json_array={data} />
+    </Container>
   );
     //    {data.length?data.map(el=><p>el</p>):<p>loading...</p>}
 }
