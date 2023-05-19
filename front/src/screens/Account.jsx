@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
   import * as React from 'react';
@@ -62,6 +63,7 @@ const Account = () => {
     <Forms/>
 
     </Container>
+    <Footer/>
     </div>
 
       
