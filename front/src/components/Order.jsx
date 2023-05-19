@@ -39,8 +39,6 @@ const Order = (props) =>{
   const [expanded, setExpanded] = React.useState(0);
 
   const handleExpandClick = (i) => {
-    console.log(i);
-    console.log(expanded);
     setExpanded(i);
   };
   return (

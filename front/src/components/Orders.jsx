@@ -16,7 +16,6 @@ import Order from './Order'
 async function parseJson(){
   const data = await fetch("../../tmp_json/orders.json").then((response)=>response.json());
 
-  console.log(data.orders);
   return data.orders;
 }
 
