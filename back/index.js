@@ -1,43 +1,28 @@
-const express = require('express');
-const mysql = require('mysql');
-const {userRouter} = require("./routes/users");
+import express from 'express';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+
+import {localLogin} from "./auth/helpers/jwt.js";
+import {jwtLogin} from "./auth/helpers/jwt.js";
+import {authRouter} from "./auth/auth.controller.js";
+import {usersRouter} from "./users/users.controller.js";
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize({}));
+
+passport.use('local', localLogin);
+passport.use('jwt', jwtLogin);
+
+// Our simple "database":
 const port = 3000;
 
-// Create a MySQL connection pool
-const pool = mysql.createPool({
-    host: 'database', // This refers to the Docker Compose service name of the MySQL database container
-    user: 'db_user',
-    password: 'St*TQ9we21m08Qm',
-    database: 'app_db',
-});
+const globalRouter = express.Router()
+globalRouter.use('/users', usersRouter);
+globalRouter.use('/auth', authRouter);
 
-// Endpoint to retrieve users
-app.get('/api/users', (req, res) => {
-    pool.getConnection((err, connection) => {
-        if (err) {
-            console.error('Error getting MySQL connection:', err);
-            return res.status(500).json({ error: 'Failed to connect to the database' });
-        }
-
-        const query = 'SELECT * FROM users';
-
-        connection.query(query, (error, results) => {
-            connection.release(); // Release the connection back to the pool
-
-            if (error) {
-                console.error('Error executing MySQL query:', error);
-                return res.status(500).json({ error: 'Failed to retrieve users from the database' });
-            }
-
-            res.json(results);
-        });
-    });
-});
-
-app.use('/users', userRouter)
-
+app.use('/api', globalRouter);
 
 // Start the server
 app.listen(port, () => {
