@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography'
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Orders from '../components/Orders';
 
 
   import * as React from 'react';
@@ -45,7 +46,9 @@ const Forms = ()=>{
     <Typography  mt="1em" >{"Your shipping address: "+shipping_address}</Typography>
 
     </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="2">
+          <Orders/>
+    </TabPanel>
       </TabContext>
     </Box>
   );
@@ -59,7 +62,9 @@ const Account = () => {
       
     <Navbar/>
     <Container maxWidth="md" className="mainContainer">
-    <h3 > Hello user!</h3>
+    <Typography variant="h3">
+    Hello user!
+    </Typography>
     <Forms/>
 
     </Container>

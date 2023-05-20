@@ -89,16 +89,16 @@ const Order = (props) =>{
                   <List>
           {
            el.items.map((el,j)=>(
-          <ListItem sx={{padding:"0em"}} key={el}>
+          <ListItem sx={{padding:"0em"}} key={i}>
             <ListItemButton sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
              <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
               <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
              </Box> 
               <Box sx={{display:"flex",flexDirection:"column",justifySelf:"end"}}>
                 
-             <Typography sx={{fontsize:"0.75em"}}>{el.product_title}</Typography>
+             <Typography  >{el.product_title}</Typography>
 
-             <Typography  sx>{el.price}</Typography>
+             <Typography sx={{alignSelf:"end"}} variant="subtitle2">{el.price + " ✖️ " + el.amount +  " 🟰 " + el.amount*el.price}</Typography>
               </Box>
             </ListItemButton>
           </ListItem>

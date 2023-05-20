@@ -2,12 +2,19 @@
   "orders":[
     {
       "order_date": "2023-04-13",
-      "total":"35.00",
+      "total":"140.00",
       "items": [
         {
           "price": "35.00",
           "product_title": "Personalised Dog & Cat Christmas Stockings",
-          "image": "https://scx1.b-cdn.net/csz/news/800/2017/theoreticala.jpg"
+          "image": "https://scx1.b-cdn.net/csz/news/800/2017/theoreticala.jpg",
+          "amount":"2"
+        },
+        {
+          "price": "33.00",
+          "product_title": "Personalised Dog & Cat Christmas Stockings",
+          "image": "https://scx1.b-cdn.net/csz/news/800/2017/theoreticala.jpg",
+          "amount":"2"
         }
       ]
     },
@@ -18,8 +25,10 @@
         {
           "price": "30.00",
           "product_title": "Personalised Dog & Cat Christmas Stockings",
-          "image": "https://scx1.b-cdn.net/csz/news/800/2017/theoreticala.jpg"
+          "image": "https://scx1.b-cdn.net/csz/news/800/2017/theoreticala.jpg",
+          "amount":"1"
         }
+        
       ]
     }
   ]
