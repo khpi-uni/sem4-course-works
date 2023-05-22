@@ -42,8 +42,8 @@ export const deleteUser = async (req, res) => {
 
     let sqlQuery = 'DELETE FROM users WHERE email=?';
 
-    db.query(sqlQuery, [email], (err, results) => {
-        if(err) {
+    db.query(sqlQuery, [email], (err) => {
+        if (err) {
             res.status(400).send({error: err});
             return;
         }
@@ -59,7 +59,7 @@ export const deleteUser = async (req, res) => {
 export const editUser = async (req, res) => {
     const {email} = req.body;
 
-    if(!email) {
+    if (!email) {
         res.status(400).send({
             error: 'email is required'
         })
@@ -69,7 +69,7 @@ export const editUser = async (req, res) => {
 
     const candidate = await findUserByEmail(email);
 
-    if(!candidate) {
+    if (!candidate) {
         res.status(400).send({
             error: 'user with this email does not exist'
         });
@@ -77,10 +77,17 @@ export const editUser = async (req, res) => {
         return;
     }
 
-    let {newEmail, password: newPassword, shippingAddress: newShippingAddress, billingAddress: newBillingAddress, role: newRole, blacklistStatus: newBlacklistStatus} = req.body;
+    let {
+        newEmail,
+        password: newPassword,
+        shippingAddress: newShippingAddress,
+        billingAddress: newBillingAddress,
+        role: newRole,
+        blacklistStatus: newBlacklistStatus
+    } = req.body;
 
     // additional validation
-    if(newRole !== 'admin' && newRole !== 'client') {
+    if (newRole !== 'admin' && newRole !== 'client') {
         newRole = null;
     }
 
@@ -96,7 +103,7 @@ export const editUser = async (req, res) => {
     let sqlQuery = 'UPDATE users SET email = ?, password = ?, shipping_address = ?, billing_address = ?, role = ?, is_blacklisted = ? WHERE id = ?';
 
     db.query(sqlQuery, [...Object.values(newUser), candidate.id], (err, results) => {
-        if(err) {
+        if (err) {
             res.status(400).send({
                 error: err
             })
@@ -109,5 +116,19 @@ export const editUser = async (req, res) => {
             newUser: omitPassword(newUser),
             results
         })
+    })
+}
+
+export const getCurrentUser = async (req, res) => {
+    if (!req.user) {
+        res.status(400).send({
+            error: 'Invalid token, user with such id does not exist'
+        })
+
+        return;
+    }
+
+    res.send({
+        ...omitPassword(req.user)
     })
 }
