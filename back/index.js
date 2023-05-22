@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
+import cors from "cors";
 
 import {localLogin} from "./auth/helpers/jwt.js";
 import {jwtLogin} from "./auth/helpers/jwt.js";
@@ -11,6 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize({}));
+app.use(cors());
 
 passport.use('local', localLogin);
 passport.use('jwt', jwtLogin);
