@@ -93,8 +93,6 @@ export const editUser = async (req, res) => {
         blacklistStatus: newBlacklistStatus ?? candidate.is_blacklisted
     };
 
-    console.log(newUser);
-
     let sqlQuery = 'UPDATE users SET email = ?, password = ?, shipping_address = ?, billing_address = ?, role = ?, is_blacklisted = ? WHERE id = ?';
 
     db.query(sqlQuery, [...Object.values(newUser), candidate.id], (err, results) => {

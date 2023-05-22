@@ -18,7 +18,7 @@ export const login = (req, res) => {
 
         // Generate the token
         const token = jwt.sign({user_id: user.id}, process.env.JWT_SALT, {
-            expiresIn: process.env.JWT_LIFETIME
+            expiresIn: parseInt(process.env.JWT_LIFETIME)
         });
 
         // Respond with token
@@ -60,7 +60,7 @@ export const signup = async (req, res) => {
 
         // Generate the token
         const token = jwt.sign({user_id: newUserId}, process.env.JWT_SALT, {
-            expiresIn: process.env.JWT_LIFETIME
+            expiresIn: parseInt(process.env.JWT_LIFETIME)
         });
 
         res.send({token})
