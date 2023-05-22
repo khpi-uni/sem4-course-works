@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import cors from "cors";
 
-import {localLogin} from "./auth/helpers/jwt.js";
+import {jwtAdminLogin, localLogin} from "./auth/helpers/jwt.js";
 import {jwtLogin} from "./auth/helpers/jwt.js";
 import {authRouter} from "./auth/auth.controller.js";
 import {usersRouter} from "./users/users.controller.js";
@@ -16,12 +16,13 @@ app.use(cors());
 
 passport.use('local', localLogin);
 passport.use('jwt', jwtLogin);
+passport.use('jwt-admin', jwtAdminLogin);
 
 // Our simple "database":
 const port = 3000;
 
 const globalRouter = express.Router()
-globalRouter.use('/users', usersRouter);
+globalRouter.use('/user', usersRouter);
 globalRouter.use('/auth', authRouter);
 
 app.use('/api', globalRouter);

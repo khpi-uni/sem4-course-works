@@ -1,9 +1,9 @@
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
-import {findUserByEmail} from "../users/users.service.js";
 import {hashPassword} from "./helpers/password.js";
 import {db} from "../db.js";
+import {findUserByEmail} from "../users/helpers/user.js";
 
 dotenv.config({path: '.env'});
 

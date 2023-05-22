@@ -1,5 +1,5 @@
+import {findUserByEmail, omitPassword, retrieveAllUsers} from "./helpers/user.js";
 import {db} from "../db.js";
-import {omitPassword} from "./helpers/user.js";
 
 export const getUsers = async (req, res) => {
     const usersObj = await retrieveAllUsers();
@@ -18,35 +18,38 @@ export const getUsers = async (req, res) => {
     res.send({users: usersWithoutPassword})
 }
 
-export const retrieveAllUsers = () => {
-    let sqlQuery = 'SELECT * FROM users';
-    return new Promise((resolve, reject) => {
-        db.query(sqlQuery, [], (err, results) => {
-            if (err) {
-                reject({error: err, users: null});
-            } else if (!Array.isArray(results)) {
-                reject({error: 'Database did not return array for users', users: null});
-            } else {
-                resolve({users: results});
-            }
-        });
-    });
-}
+export const deleteUser = async (req, res) => {
+    const {email} = req.body;
 
-export const findUserByEmail = (email) => {
     if (!email) {
-        return null;
+        res.status(400).send({
+            error: 'Please provide email of user that has to be deleted'
+        })
+
+        return;
     }
 
-    let sqlQuery = 'SELECT * FROM users WHERE email=?';
+    const candidate = await findUserByEmail(email);
 
-    return new Promise((resolve, reject) => {
-        db.query(sqlQuery, [email], (err, results) => {
-            if (err) {
-                reject({error: err, user: null});
-            }
+    if (!candidate) {
+        res.status(400).send({
+            error: 'User with this email does not exist'
+        })
 
-            resolve(results[0]);
-        });
-    });
+        return;
+    }
+
+    let sqlQuery = 'DELETE FROM users WHERE email=?';
+
+    db.query(sqlQuery, [email], (err, results) => {
+        if(err) {
+            res.status(400).send({error: err});
+            return;
+        }
+
+        res.send({
+            success: true,
+            message: 'successfully deleted the user'
+        })
+    })
 }
