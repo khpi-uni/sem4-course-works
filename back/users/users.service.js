@@ -132,3 +132,81 @@ export const getCurrentUser = async (req, res) => {
         ...omitPassword(req.user)
     })
 }
+
+export const addUserToBlacklist = async (req, res) => {
+    const {email} = req.body;
+
+    if(!email) {
+        res.status(400).send({
+            error: 'Email is required'
+        });
+
+        return;
+    }
+
+    const candidate = await findUserByEmail(email);
+
+    if(!candidate) {
+        res.status(400).send({
+            error: 'user with this email does not exist'
+        });
+
+        return;
+    }
+
+    let sqlQuery = 'UPDATE users SET is_blacklisted = 1 WHERE email = ?';
+
+    db.query(sqlQuery, [email], (err) => {
+        if(err) {
+            res.status(400).send({
+                error: err
+            });
+
+            return;
+        }
+
+        res.status(200).send({
+            status: 'success',
+            message: 'user was successfully blacklisted'
+        })
+    })
+}
+
+export const removeUserFromBlacklist = async (req, res) => {
+    const {email} = req.body;
+
+    if(!email) {
+        res.status(400).send({
+            error: 'Email is required'
+        });
+
+        return;
+    }
+
+    const candidate = await findUserByEmail(email);
+
+    if(!candidate) {
+        res.status(400).send({
+            error: 'user with this email does not exist'
+        });
+
+        return;
+    }
+
+    let sqlQuery = 'UPDATE users SET is_blacklisted = 0 WHERE email = ?';
+
+    db.query(sqlQuery, [email], (err) => {
+        if(err) {
+            res.status(400).send({
+                error: err
+            });
+
+            return;
+        }
+
+        res.status(200).send({
+            status: 'success',
+            message: 'user was successfully removed from blacklist'
+        })
+    })
+}

@@ -1,11 +1,22 @@
 import express from "express";
-import {deleteUser, editUser, getCurrentUser, getUsers} from "./users.service.js";
+import {
+    addUserToBlacklist,
+    deleteUser,
+    editUser,
+    getCurrentUser,
+    getUsers,
+    removeUserFromBlacklist
+} from "./users.service.js";
 import {passportAdminJWT, passportJWT} from "../auth/helpers/jwt.js";
 
 const usersRouter = express.Router();
 
 usersRouter.get('/get-all', passportAdminJWT, getUsers);
 usersRouter.get('/me', passportJWT, getCurrentUser)
+
+usersRouter.post('/add-to-blacklist', passportAdminJWT, addUserToBlacklist);
+usersRouter.post('/remove-from-blacklist', passportAdminJWT, removeUserFromBlacklist)
+
 
 usersRouter.patch('/edit', passportAdminJWT, editUser);
 
