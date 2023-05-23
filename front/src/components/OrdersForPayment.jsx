@@ -111,7 +111,7 @@ const OrdersForPayment = (props) =>{
              <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
               <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
              </Box> 
-              <Box sx={{display:"flex",flexDirection:"column",justifySelf:"end"}}>
+              <Box sx={{display:"flex", margin:"2px 0",flexDirection:"column",justifySelf:"end"}}>
                 
              <Typography  >{el.product_title}</Typography>
 

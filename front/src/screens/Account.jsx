@@ -19,9 +19,6 @@ import {useEffect, useState} from "react";
 import {API_HOST} from "../api.js";
 
 
-let email = "baka@gmail.com";
-let billing_address = "Lviv, Ukraine";
-let shipping_address = "Kyiv, Ukraine";
 
 const Forms = ()=>{
   const [value, setValue] = React.useState('1');
