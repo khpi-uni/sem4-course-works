@@ -31,7 +31,7 @@ const Index = () => {
   return (
 <div>
   <Navbar/> 
-    <Typography variant="h4" sx={{textAlign:"center"}}>
+    <Typography variant="h4" sx={{textAlign:"center",margin:"1em 0"}}>
       Welcome to the shop!
     </Typography> 
     {
