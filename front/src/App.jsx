@@ -1,6 +1,6 @@
 import { useState} from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import './App.css'
+import './App.scss'
 
 import SignUp from './screens/SignUp'
 import SignIn from './screens/SignIn'
