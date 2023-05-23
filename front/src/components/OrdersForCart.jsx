@@ -58,21 +58,17 @@ const Order = (props) =>{
 
 
   const handlePlusClick = (j)=>{
-    console.log("+");
     console.log(data.items)
 
    data.items[j].amount = parseInt(data.items[j].amount)+1;
     setData(JSON.parse(JSON.stringify(data)));
-    console.log(data.items[j].amount);
   }
 
   const handleMinusClick = (j)=>{
 
-    console.log("-");
     
    data.items[j].amount = parseInt(data.items[j].amount)-1;
     setData(JSON.parse(JSON.stringify(data)));
-    console.log(data.items[j].amount);
   }
 
   const handleCrossClick = (i)=>{
@@ -85,7 +81,6 @@ const Order = (props) =>{
   return (
 <div>
   
-<div>
     {
       data?(
 
@@ -137,6 +132,14 @@ const Order = (props) =>{
             </List>
 
 
+    <div>
+      <Typography>{"Order Total:"+data.items.reduce((sum,current)=> sum+parseInt(current.price)*current.amount,0) }</Typography>
+    </div>
+
+    <Button variant="contained"
+    component="a" href=""
+    sx={{margin:"1em"  }}
+    >Proceed to checkout</Button>
         </Card>
         )
       
@@ -150,11 +153,8 @@ const Order = (props) =>{
   }
   
 </div>
-    <div>
-      <Typography>{"Order Total:"}</Typography>
-    </div>
-</div>
   )
+    //.items.reduce((a,cur)=>a+parseInt(cur.price))
 }
 
 
