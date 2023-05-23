@@ -8,6 +8,7 @@ import Thanks from './screens/Thanks'
 import Account from './screens/Account'
 import Cart from './screens/Cart'
 import Orders from './components/Orders'
+import Section from './Section'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,20 +16,20 @@ function App() {
   return (
     <div id="root">
       
+        <Section auth={1}>
     <Router>
       <main className="app">
         <Routes>
-        <Section auth={1}>
           <Route exact path="/account" element={<Account/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />
           <Route exact path="/" element={<SignUp/>} />
           <Route exact path="/signin" element={<SignIn/>} />
-      </Section>
         </Routes>
       </main>
     </Router>
+      </Section>
     </div>
   )
 }

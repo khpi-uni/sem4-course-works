@@ -54,6 +54,7 @@ const Order = (props) =>{
 
   const [expanded, setExpanded] = React.useState(0);
 
+  const auth = useContext(AuthContext);
 
   const handlePlusClick = (j)=>{
     console.log(data.items)
