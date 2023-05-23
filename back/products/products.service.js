@@ -1,5 +1,6 @@
-import {getProductById, retrieveAllProducts} from "./helpers/products.js";
+import {findProductById, retrieveAllProducts} from "./helpers/products.js";
 import {db} from "../db.js";
+import e from "express";
 
 export const getAllProducts = async (req, res) => {
     const productsObj = await retrieveAllProducts();
@@ -64,7 +65,47 @@ export const createProduct = async (req, res) => {
         res.send({
             status: 'success',
             message: 'Product was successfully created',
-            newProduct: await getProductById(results.insertId),
+            newProduct: await findProductById(results.insertId),
+            results
+        })
+    })
+}
+
+export const deleteProduct = async (req, res) => {
+    const {id} = req.body;
+
+    if (!id) {
+        res.status(400).send({
+            error: 'id is required'
+        })
+
+        return;
+    }
+
+    const candidate = await findProductById(id);
+
+    if (!candidate) {
+        res.status(400).send({
+            error: 'Product with this id does not exist'
+        });
+
+        return;
+    }
+
+    let sqlQuery = 'DELETE FROM products WHERE id = ?';
+
+    db.query(sqlQuery, [id], (err, results) => {
+        if (err) {
+            res.status(400).send({
+                error: err
+            })
+
+            return;
+        }
+
+        res.send({
+            status: 'success',
+            message: 'Product was successfully deleted',
             results
         })
     })

@@ -15,7 +15,7 @@ export const retrieveAllProducts = () => {
     });
 }
 
-export const getProductById = async (id) => {
+export const findProductById = async (id) => {
     if(!id) {
         return null;
     }
