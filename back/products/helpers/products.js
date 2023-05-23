@@ -16,7 +16,7 @@ export const retrieveAllProducts = () => {
 }
 
 export const findProductById = async (id) => {
-    if(!id) {
+    if (!id) {
         return null;
     }
 
@@ -31,4 +31,33 @@ export const findProductById = async (id) => {
             resolve(results[0]);
         });
     });
+}
+
+export const getProductPriceById = async (id) => {
+    const product = await findProductById(id);
+
+    if (!product) {
+        return 0;
+    }
+
+    return parseFloat(product.price);
+}
+
+export const getTotal = async (orderInfo) => {
+    console.log(orderInfo)
+    if(!orderInfo) {
+        return 0;
+    }
+
+    if(!Array.isArray(orderInfo)) {
+        return 0;
+    }
+
+    let total = 0;
+
+    for(let orderInfoItem of orderInfo) {
+        total += await getProductPriceById(orderInfoItem.productId) * orderInfoItem.amount;
+    }
+
+    return total;
 }

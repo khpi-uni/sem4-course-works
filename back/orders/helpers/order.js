@@ -86,11 +86,11 @@ export const processOrderWithProducts = (orderWithProducts) => {
 }
 
 export const processOrdersOfUser = (orders) => {
-    if(!orders) {
+    if (!orders) {
         return null;
     }
 
-    if(!Array.isArray(orders)) {
+    if (!Array.isArray(orders)) {
         return null;
     }
 
@@ -98,11 +98,11 @@ export const processOrdersOfUser = (orders) => {
 
     orders.forEach(order => {
         const orderId = order.order_id;
-        if(!orderId) {
+        if (!orderId) {
             return;
         }
 
-        if(!(orderId in orderMap)) {
+        if (!(orderId in orderMap)) {
             orderMap[orderId] = {
                 orderId,
                 userId: order.user_id,
@@ -113,7 +113,7 @@ export const processOrdersOfUser = (orders) => {
             }
         }
 
-        if(!order.product_id) {
+        if (!order.product_id) {
             return;
         }
 
