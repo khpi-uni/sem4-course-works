@@ -45,7 +45,7 @@ const Navbar = () =>{
     <Button variant="contained"
     sx={{margin:"1em"  }}
     
-    >Cart<CartIcon fontSize="small"/></Button>
+    >Cart<CartIcon sx={{margin:"0 2px"}} fontSize="small"/></Button>
     </Box>
     </Toolbar>
     </AppBar>
