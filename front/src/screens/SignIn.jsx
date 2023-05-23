@@ -1,3 +1,4 @@
+
 import "./SignUp.css" 
 
 
@@ -12,7 +13,7 @@ import Footer from '../components/Footer';
 
 import * as React from 'react';
 
-const SignUp = ()=>{
+const SignIn = ()=>{
   
   return (
 
@@ -32,7 +33,7 @@ const SignUp = ()=>{
     <Button variant="contained"
     sx={{margin:"1em"  }}
     >Sign up</Button>
-    <Typography mt="1em" component="a" href="signin" sx={{textDecoration:"none",color:"grey"}}>{"Have an account? Sign in"}</Typography>
+    <Typography mt="1em" component="a" href="signup" sx={{textDecoration:"none",color:"grey"}}>{"Don't have an account? Sign up"}</Typography>
     </Container>
 
 
@@ -42,4 +43,4 @@ const SignUp = ()=>{
 }
 
 
-export default SignUp; 
+export default SignIn; 

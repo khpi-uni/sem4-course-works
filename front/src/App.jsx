@@ -1,22 +1,15 @@
-import {useEffect, useState} from 'react'
+import { useState} from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-/*
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-
-import HomeScreen from './screens/HomeScreen'
-import ProductScreen from './screens/ProductScreen'
-import CartScreen from './screens/CartScreen'
-import SignIn from './screens/SignIn'
-import CheckoutScreen from './screens/CheckoutScreen' 
-*/
-//admin screens
-//
 import SignUp from './screens/SignUp'
+import SignIn from './screens/SignIn'
+import Thanks from './screens/Thanks'
+import Account from './screens/Account'
+import Cart from './screens/Cart'
+import Orders from './components/Orders'
+import Section from './Section'
+import Payment from './screens/Payment'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,13 +17,21 @@ function App() {
   return (
     <div id="root">
       
+        <Section auth={1}>
     <Router>
       <main className="app">
         <Routes>
+          <Route exact path="/account" element={<Account/>} />
+//          <Route exact path="/payment" element={<Payment/>} />
+          <Route exact path="/cart" element={<Cart/>} />
+          <Route exact path="/orders" element={<Orders/>} />
+          <Route exact path="/thanks" element={<Thanks/>} />
           <Route exact path="/" element={<SignUp/>} />
+          <Route exact path="/signin" element={<SignIn/>} />
         </Routes>
       </main>
     </Router>
+      </Section>
     </div>
   )
 }
