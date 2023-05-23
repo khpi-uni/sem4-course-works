@@ -9,6 +9,7 @@ import Account from './screens/Account'
 import Cart from './screens/Cart'
 import Orders from './components/Orders'
 import Section from './Section'
+import Payment from './screens/Payment'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
       <main className="app">
         <Routes>
           <Route exact path="/account" element={<Account/>} />
+          <Route exact path="/payment" element={<Payment/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />
