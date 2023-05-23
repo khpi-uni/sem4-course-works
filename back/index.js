@@ -8,10 +8,11 @@ import {jwtLogin} from "./auth/helpers/jwt.js";
 import {authRouter} from "./auth/auth.controller.js";
 import {usersRouter} from "./users/users.controller.js";
 import {productRouter} from "./products/products.controller.js";
+import {orderRouter} from "./orders/orders.controller.js";
 
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize({}));
 app.use(cors());
 
@@ -26,6 +27,7 @@ const globalRouter = express.Router()
 globalRouter.use('/user', usersRouter);
 globalRouter.use('/auth', authRouter);
 globalRouter.use('/product', productRouter);
+globalRouter.use('/order', orderRouter);
 
 app.use('/api', globalRouter);
 
