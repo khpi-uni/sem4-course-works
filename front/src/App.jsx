@@ -16,13 +16,12 @@ function App() {
 
   return (
     <div id="root">
-      
         <Section auth={1}>
     <Router>
       <main className="app">
         <Routes>
           <Route exact path="/account" element={<Account/>} />
-//          <Route exact path="/payment" element={<Payment/>} />
+          {/*<Route exact path="/payment" element={<Payment/>} />*/}
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />
