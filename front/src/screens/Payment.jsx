@@ -4,7 +4,7 @@ import SignIn from "./SignIn"
 
 import * as React from 'react';
 import { useContext } from 'react';
-import AuthContext from '../AuthContext.js'
+import {AuthContext} from '../AuthContext.js'
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
