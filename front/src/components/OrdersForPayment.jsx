@@ -74,7 +74,8 @@ const OrdersForPayment = (props) =>{
 
   const handleMinusClick = (j)=>{
 
-    
+   if(!parseInt(data.items[j].amount))return; 
+
    data.items[j].amount = parseInt(data.items[j].amount)-1;
     setData(JSON.parse(JSON.stringify(data)));
   }
@@ -138,14 +139,14 @@ const OrdersForPayment = (props) =>{
 
            )
         }
-
-        auth?(
+        {
+        !auth?(
           <SignIn/>
           
         ):(<div>
           
         </div>)
-          
+        } 
 
           
             </List>
