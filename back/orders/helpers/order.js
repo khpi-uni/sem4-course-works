@@ -126,3 +126,21 @@ export const processOrdersOfUser = (orders) => {
 
     return Object.values(orderMap);
 }
+
+export const findOrderById = (id) => {
+    if (!id) {
+        return null;
+    }
+
+    let sqlQuery = 'SELECT * FROM orders WHERE id = ?';
+
+    return new Promise((resolve, reject) => {
+        db.query(sqlQuery, [id], (err, results) => {
+            if (err) {
+                reject({err, order: null});
+            }
+
+            resolve({order: results[0]})
+        });
+    })
+}

@@ -1,5 +1,5 @@
-import {processOrderWithProducts, retrieveOrderWithItemsById} from "./helpers/order.js";
-import {getProductPriceById, getTotal} from "../products/helpers/products.js";
+import {findOrderById, processOrderWithProducts, retrieveOrderWithItemsById} from "./helpers/order.js";
+import {getTotal} from "../products/helpers/products.js";
 import {db} from "../db.js";
 
 export const getOrder = async (req, res) => {
@@ -69,6 +69,48 @@ export const createOrder = async (req, res) => {
             status: 'success',
             message: 'Order was successfully placed'
         })
+    })
+}
+
+export const deleteOrder = async (req, res) => {
+    const {id} = req.body;
+
+    if (!id) {
+        res.status(400).send({
+            error: 'Id is required'
+        });
+
+        return;
+    }
+
+    const candidate = await findOrderById(id);
+
+    console.log(candidate);
+
+    if (!candidate.order) {
+        res.status(400).send({
+            error: 'Order with this id does not exist'
+        })
+
+        return;
+    }
+
+    let sqlQuery = 'DELETE FROM orders WHERE id = ?';
+
+    db.query(sqlQuery, [id], (err, results) => {
+        if (err) {
+            res.status(400).send({
+                error: err
+            })
+
+            return;
+        }
+
+        res.send({
+            status: 'success',
+            message: 'Order was successfully deleted',
+            results
+        });
     })
 }
 
