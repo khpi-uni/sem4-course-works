@@ -18,12 +18,14 @@ function App() {
     <Router>
       <main className="app">
         <Routes>
+        <Section auth={1}>
           <Route exact path="/account" element={<Account/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />
           <Route exact path="/" element={<SignUp/>} />
           <Route exact path="/signin" element={<SignIn/>} />
+      </Section>
         </Routes>
       </main>
     </Router>
