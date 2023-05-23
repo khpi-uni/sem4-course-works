@@ -2,7 +2,7 @@
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import OrderForPayment from "../components/OrdersForPayment";
+import OrdersForPayment from "../components/OrdersForPayment";
 
 import { useState,useEffect} from 'react'
 
@@ -48,7 +48,7 @@ sx={{
   }}>
 
 
-    <OrderForPayment json_array={data}/>
+    <OrdersForPayment json_array={data}/>
     </Container>
 
 

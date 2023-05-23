@@ -87,89 +87,67 @@ const OrdersForPayment = (props) =>{
     setExpanded(i);
   };
   return (
-<div>
-  
-    {
-      data?(
-
+  data? (
+    !auth ? (
+      <SignIn/>
+    ) : (
       <Card sx={{padding: "1em 0.5em"}}>
         <Box sx={{display:"flex",flexDirection:"row",flexGrow:"1"}}>
-      <Typography sx={{alignSelf:"start",flexGrow:"1"}}>
-        {data.order_date}
-      </Typography>
-      <Typography sx={{justifySelf:"end",}}>
-        {data.total}
-      </Typography>
-      </Box>
+          <Typography sx={{alignSelf:"start",flexGrow:"1"}}>
+            {data.order_date}
+          </Typography>
+          <Typography sx={{justifySelf:"end"}}>
+            {data.total}
+          </Typography>
+        </Box>
 
-                  <List>
+        <List>
           {
-           data.items.map((el,j)=>(
-          <ListItem sx={{padding:"0em"}} key={j}>
-            <ListItemButton sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
-             <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
-              <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
-             </Box> 
-              <Box sx={{display:"flex",flexDirection:"column",justifySelf:"end"}}>
-                
-             <Typography  >{el.product_title}</Typography>
+            data.items.map((el,j)=>(
+              <ListItem sx={{padding:"0em"}} key={j}>
+                <ListItemButton sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
+                  <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
+                    <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
+                  </Box> 
+                  <Box sx={{display:"flex",flexDirection:"column",justifySelf:"end"}}>
+                    <Typography>{el.product_title}</Typography>
 
-             <Box sx={{alignSelf:"end",display:"flex",flexDirection:"row"}}>
+                    <Box sx={{alignSelf:"end",display:"flex",flexDirection:"row"}}>
+                      <Box variant="subtitle2">{el.price + " ✖️ "}</Box>
 
-             <Box  variant="subtitle2">{el.price + " ✖️ " } </Box>
+                      <Box sx={{padding:"0 1em ",display:"flex"}}>
+                        <IconButton sx={{padding:"0"}}onClick={()=>handleMinusClick(j)}>
+                          <RemoveIcon sx={{fontSize:14,color:"secondary.light"}}/>
+                        </IconButton>
+                        <Box variant="subtitle2">{el.amount}</Box>
+                        <IconButton sx={{padding:"0"}} onClick={()=>handlePlusClick(j)}>
+                          <AddIcon sx={{fontSize:14,color:"secondary.light"}}/>
+                        </IconButton>
+                      </Box>
 
-             <Box sx={{padding:"0 1em ",display:"flex"}}>
-             <IconButton sx={{padding:"0"}}onClick={()=>handleMinusClick(j)}>
-                <RemoveIcon sx={{fontSize:14,color:"secondary.light"}}/>
-             </IconButton>
-             <Box  variant="subtitle2">{ el.amount} </Box>
-             <IconButton sx={{padding:"0"}} onClick={()=>handlePlusClick(j)}>
-                <AddIcon sx={{fontSize:14,color:"secondary.light"}}/>
-             </IconButton>
-             </Box>
-
-
-             <Box>{  " 🟰 " + el.amount*el.price}</Box></Box>
-              </Box>
-            </ListItemButton>
-          </ListItem>
-
-           )
-
-           ) 
-        &&  
-        auth?(
-          <SignIn/>
-          
-        ):<div>
-          
-        </div>
+                      <Box>{" 🟰 " + el.amount*el.price}</Box>
+                    </Box>
+                  </Box>
+                </ListItemButton>
+              </ListItem>
+            ))
           }
-            </List>
+        </List>
 
+        <div>
+          <Typography>{"Order Total:"+data.items.reduce((sum,current)=> sum+parseInt(current.price)*current.amount,0)}</Typography>
+        </div>
 
-    <div>
-      <Typography>{"Order Total:"+data.items.reduce((sum,current)=> sum+parseInt(current.price)*current.amount,0) }</Typography>
-    </div>
-
-    <Button variant="contained"
-    component="a" href=""
-    sx={{margin:"1em"  }}
-    >Pay</Button>
-        </Card>
-        )
-      
-        :
-      <Container maxWidth="sm"> 
-
+        <Button variant="contained" component="a" href="" sx={{margin:"1em"}}>
+          Pay
+        </Button>
+      </Card>
+    )
+  ) : (
+    <Container maxWidth="sm"> 
       <Card sx={{padding:"9em 1em",textAlign:"center"}}> 
         <Typography variant="h5">There are currently no orders!</Typography>
       </Card>
-      </Container>
-  }
-  
-</div>
-  )
+    </Container>
 }
-
 export default OrdersForPayment;
