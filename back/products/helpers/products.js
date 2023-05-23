@@ -14,3 +14,21 @@ export const retrieveAllProducts = () => {
         });
     });
 }
+
+export const getProductById = async (id) => {
+    if(!id) {
+        return null;
+    }
+
+    let sqlQuery = 'SELECT * FROM products WHERE id=?';
+
+    return new Promise((resolve, reject) => {
+        db.query(sqlQuery, [id], (err, results) => {
+            if (err) {
+                reject({error: err, user: null});
+            }
+
+            resolve(results[0]);
+        });
+    });
+}
