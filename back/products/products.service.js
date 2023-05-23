@@ -1,6 +1,5 @@
 import {findProductById, retrieveAllProducts} from "./helpers/products.js";
 import {db} from "../db.js";
-import e from "express";
 
 export const getAllProducts = async (req, res) => {
     const productsObj = await retrieveAllProducts();
@@ -66,6 +65,64 @@ export const createProduct = async (req, res) => {
             status: 'success',
             message: 'Product was successfully created',
             newProduct: await findProductById(results.insertId),
+            results
+        })
+    })
+}
+
+export const editProduct = async (req, res) => {
+    const {id} = req.body;
+
+    if (!id) {
+        res.status(400).send({
+            error: 'product id is required'
+        })
+
+        return;
+    }
+
+    const product = await findProductById(id);
+
+    if (!product) {
+        res.status(400).send({
+            error: 'product with this id does not exist'
+        });
+
+        return;
+    }
+
+    let {
+        createdBy: newCreatedBy,
+        price: newPrice,
+        title: newTitle,
+        description: newDescription,
+        inStock: newInStock,
+        thumbnailId: newThumbnailId,
+    } = req.body;
+
+    const updatedProduct = {
+        createdBy: newCreatedBy ?? product.created_by_id,
+        price: newPrice ?? product.price,
+        title: newTitle ?? product.title,
+        description: newDescription ?? product.description,
+        inStock: newInStock ?? product.in_stock,
+        thumbnailId: newThumbnailId ?? product.thumbnail_id,
+    };
+
+    let sqlQuery = 'UPDATE products SET created_by_id = ?, price = ?, title = ?, description = ?, in_stock = ?, thumbnail_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?';
+
+    db.query(sqlQuery, [...Object.values(updatedProduct), product.id], async (err, results) => {
+        if (err) {
+            res.status(400).send({
+                error: err
+            })
+
+            return;
+        }
+
+        res.send({
+            message: 'product was successfully edited',
+            updatedProduct: await findProductById(product.id),
             results
         })
     })
