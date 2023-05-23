@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState,useEffect} from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css'
 
@@ -10,6 +10,7 @@ import Cart from './screens/Cart'
 import Orders from './components/Orders'
 import Section from './Section'
 import Payment from './screens/Payment'
+import Index from './screens/Index'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
       <main className="app">
         <Routes>
           <Route exact path="/account" element={<Account/>} />
+          <Route exact path="/index" element={<Index/>} />
           <Route exact path="/payment" element={<Payment/>} /> 
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
@@ -32,7 +34,7 @@ function App() {
     </Router>
       </Section>
     </div>
-  )
+  );
 }
 
 export default App
