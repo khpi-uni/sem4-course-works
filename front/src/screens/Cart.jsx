@@ -24,7 +24,7 @@ async function parseJson(){
 
 const Cart = ()=>{
 
-   const [data, setData] = useState(0);
+  const [data, setData] = useState(0);
 
 
    useEffect(()=>{

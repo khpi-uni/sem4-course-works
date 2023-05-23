@@ -1,3 +1,4 @@
-import { createContext } from 'react';
-export default const LevelContext = createContext(1);
-
+ import { createContext } from 'react';
+ 
+ const AuthContext = createContext(0);
+ export  {AuthContext};
