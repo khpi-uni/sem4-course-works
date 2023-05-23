@@ -136,7 +136,8 @@ const OrdersForPayment = (props) =>{
 
            )
 
-           ) 
+           )
+            /*
         &&  
         auth?(
           <SignIn/>
@@ -144,6 +145,7 @@ const OrdersForPayment = (props) =>{
         ):<div>
           
         </div>
+        */
           }
             </List>
 
