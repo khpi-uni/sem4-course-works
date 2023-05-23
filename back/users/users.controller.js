@@ -3,7 +3,7 @@ import {
     addUserToBlacklist,
     deleteUser,
     editUser,
-    getCurrentUser, getOrdersOfUser,
+    getCurrentUser, getCurrentUserOrders, getOrdersOfUser,
     getUsers,
     removeUserFromBlacklist
 } from "./users.service.js";
@@ -13,6 +13,7 @@ const usersRouter = express.Router();
 
 usersRouter.get('/get-all', passportAdminJWT, getUsers);
 usersRouter.get('/me', passportJWT, getCurrentUser)
+usersRouter.get('/me/orders', passportJWT, getCurrentUserOrders)
 
 usersRouter.get('/orders', passportAdminJWT, getOrdersOfUser);
 

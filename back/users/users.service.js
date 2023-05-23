@@ -241,3 +241,25 @@ export const getOrdersOfUser = async (req, res) => {
 
     res.send(processOrdersOfUser(response.orders))
 }
+
+export const getCurrentUserOrders = async (req, res) => {
+    if (!req.user) {
+        res.status(400).send({
+            error: 'Invalid token, user with such id does not exist'
+        })
+
+        return;
+    }
+
+    const response = await retrieveOrdersWithItemsByUserId(req.user.id);
+
+    if(!response.orders) {
+        res.status(400).send({
+            orders: null
+        })
+
+        return;
+    }
+
+    res.send(processOrdersOfUser(response.orders))
+}
