@@ -1,4 +1,4 @@
-import "./Account.css";
+import "./Account.scss";
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';

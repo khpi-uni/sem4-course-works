@@ -8,9 +8,6 @@ const Footer = ()=> {
         height: "auto",
         backgroundColor: "secondary.light",
         paddingTop: "0.5rem",
-
-        position:"absolute",
-        bottom:0,
       }}
     >
       <Container maxWidth="lg">
