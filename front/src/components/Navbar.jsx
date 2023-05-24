@@ -22,32 +22,40 @@ const Navbar = () =>{
     <Box
     sx={{justifyContent:"space-between",display:"flex"}}
     >
-    <IconButton  color="inherit" aria-label="menu" sx={{display:"inline", mr: 2 }}>
-    <SpaIcon  sx={{  display: { xs: 'none', sm: 'block' } }} />
+    <IconButton  color="inherit" aria-label="menu" 
+    component="a" href="/"
+    sx={{textDecoration:'none',mr:2  }}>
+    <SpaIcon 
+    sx={{  display: { xs: 'none', sm: 'block' } }} />
     </IconButton>
 
     <Box>
-    <Typography variant="h6" color="inherit" component="a" href=""
+    <Typography variant="h6" color="inherit" component="a" href="/"
 
     sx={{textDecoration:'none',  }}
     >
     Products
     </Typography>
 
-    <Typography variant="h6" color="inherit" component="a" href=""
+    <Typography variant="h6" color="inherit" 
 
+    component="a" href="about"
     sx={{textDecoration:'none',margin:"1em"  }}
     >About us
     </Typography>
 
     <Button variant="contained"
-    sx={{margin:"1em"  }}
+    component="a" href="signup"
+    sx={{textDecoration:'none',margin:"1em"  }}
     >Sign up</Button>
     <Button variant="contained"
-    sx={{margin:"1em"  }}
+    component="a" href="signin"
+    sx={{textDecoration:'none',margin:"1em"  }}
     >Log in</Button>
+
     <Button variant="contained"
-    sx={{margin:"1em"  }}
+    component="a" href="cart"
+    sx={{textDecoration:'none',margin:"1em"  }}
     
     >Cart<CartIcon sx={{margin:"0 2px"}} fontSize="small"/></Button>
     </Box>
