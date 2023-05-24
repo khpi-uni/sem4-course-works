@@ -17,7 +17,18 @@ import {API_HOST, saveToken} from "../api.js";
 
 const Index = () => {
   const [products, setProducts] = useState(null);
+  const [cartArray, setCartArray] = useState(null);
 
+  const handleCartClick = (i)=>{
+   if(!cartArray.includes(i)){
+     cartArray.push(i);
+     setCartArray(JSON.parse(JSON.stringify(cartArray)));
+   } 
+
+    writeCartItems("../../tmp_json/orders.json",products.filter((el,i)=>cartArray.includes(i)));
+  }
+  const writeCartItems = (file_name, json_obj) => {
+  }
 
   useEffect(() => {
     // check if we have token
@@ -68,6 +79,7 @@ const Index = () => {
                     </Box>
                 <Box  sx={{textAlign:"end"}}>
     <Button variant="contained"
+                onClick={handleCartClick}
     sx={{textDecoration:'none',margin:"1em",minWidth:"32px",maxWidth:"32px",borderRadius:"50%"  }}
     
     ><CartIcon sx={{}} fontSize="small"/></Button>
