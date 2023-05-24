@@ -54,10 +54,10 @@ const Index = () => {
                       <Box sx={{display:"flex",flexDirection:"column"}}>
 
                       <Box 
-                  sx={{display:"flex",flexDirection:"row",
+                  sx={{display:"flex",flexDirection:"row",justifyContent:"space-between",margin:1
                   }} >
                         <Typography  variant="h5">{el.title}</Typography>
-                        <Typography>{ parseInt(el.price)}</Typography>
+                        <Typography>{ parseInt(el.price*100)/100.0}</Typography>
                       </Box>
 
 
