@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
 
 import SpaIcon from '@mui/icons-material/Spa';
 import CartIcon from '@mui/icons-material/ShoppingCart';
@@ -16,13 +17,16 @@ const Navbar = () =>{
     <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
     <Toolbar variant="dense">
-    <IconButton  color="inherit" aria-label="menu" sx={{ mr: 2 , position: "fixed", left:"10%"}}>
+    <Container maxWidth="xl"> 
+
+    <Box
+    sx={{justifyContent:"space-between",display:"flex"}}
+    >
+    <IconButton  color="inherit" aria-label="menu" sx={{display:"inline", mr: 2 }}>
     <SpaIcon  sx={{  display: { xs: 'none', sm: 'block' } }} />
     </IconButton>
-    <Box
-     sx={{ position:"fixed" ,right: {xs:"3em",m:"8em",xl:"20em"},  }}
-    >
 
+    <Box>
     <Typography variant="h6" color="inherit" component="a" href=""
 
     sx={{textDecoration:'none',  }}
@@ -47,6 +51,8 @@ const Navbar = () =>{
     
     >Cart<CartIcon sx={{margin:"0 2px"}} fontSize="small"/></Button>
     </Box>
+    </Box>
+    </Container>
     </Toolbar>
     </AppBar>
     </Box>
