@@ -135,25 +135,13 @@ const OrdersForPayment = (props) =>{
                 <AddIcon sx={{fontSize:14,color:"secondary.light"}}/>
              </IconButton>
              </Box>
-
-
              <Box>{  " 🟰 " + el.amount*el.price}</Box></Box>
               </Box>
             </ListItemButton>
           </ListItem>
-
            )
-
            )
         }
-        {
-        !auth?(
-          <SignIn/>
-          
-        ):(<div>
-          
-        </div>)
-        } 
 
           
             </List>
@@ -173,5 +161,6 @@ const OrdersForPayment = (props) =>{
         <Typography variant="h5">There are currently no orders!</Typography>
       </Card>
     </Container>
-}
+  )
+  )}
 export default OrdersForPayment;

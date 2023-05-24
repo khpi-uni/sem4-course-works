@@ -38,20 +38,47 @@ const Index = () => {
       products?(
         <div>
           <Container maxWidth="lg">
-            
-          </Container>
+            {
+              products.map((el,i)=>
+                <Card sx={{padding:"0em"}} className="prod-card" key={i}>
+
+                  <ListItemButton sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
+                      <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
+                        <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
+                     </Box> 
+                      <Box sx={{display:"flex",flexDirection:"column",justifySelf:"end"}}>
+
+                        <Typography  >{el.product_title}</Typography>
+
+                      <Box sx={{alignSelf:"end",display:"flex",flexDirection:"row"}}>
+
+                     <Box  variant="subtitle2">{el.price + " ✖️ " } </Box>
+
+                      <Box sx={{padding:"0 1em ",display:"flex"}}>
+                        <Box  variant="subtitle2">{ el.amount} </Box>
+                      </Box>
+
+
+                      <Box>{  " 🟰 " + el.amount*el.price}</Box>
+                      </Box>
+                    </Box>
+                  </ListItemButton>
+                </Card> 
+              )
+            }
+        </Container>
         </div>
       ):(
-      <Container maxWidth="sm"> 
+        <Container maxWidth="sm"> 
 
-      <Card sx={{padding:"9em 1em",textAlign:"center"}}> 
+        <Card sx={{padding:"9em 1em",textAlign:"center"}}> 
         <Typography variant="h5">There are currently no orders!</Typography>
-      </Card>
-      </Container>
+        </Card>
+        </Container>
       )
     }
-  <Footer/>
-</div>
+    <Footer/>
+    </div>
   )
 
 }
