@@ -22,12 +22,12 @@ function App() {
       <main className="app">
         <Routes>
           <Route exact path="/account" element={<Account/>} />
-          <Route exact path="/index" element={<Index/>} />
+          <Route exact path="/" element={<Index/>} />
           <Route exact path="/payment" element={<Payment/>} /> 
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />
-          <Route exact path="/" element={<SignUp/>} />
+          <Route exact path="/signup" element={<SignUp/>} />
           <Route exact path="/signin" element={<SignIn/>} />
         </Routes>
       </main>

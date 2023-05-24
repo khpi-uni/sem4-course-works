@@ -1,5 +1,6 @@
 
 import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box'
@@ -37,34 +38,40 @@ const Index = () => {
     </Typography> 
     {
       products?(
-        <div>
-          <Container maxWidth="lg">
+        <Box sx={{margin:"2em"}}>
+          <Container maxWidth="xl">
+            <Grid container spacing={1}>
             {
               products.map((el,i)=>
-                <Card sx={{padding:"0em"}} className="prod-card" key={i}>
+                <Card xs={8} sx={{maxWidth:"29%", padding:"0.5em", margin: 1}} variant="outlined" className="prod-card" key={i}>
 
-                  <Box sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
-                      <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
-                        <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
+                  <Box sx={{height:"32em",display:"flex", flexDirection:"column"}} >
+                      <Box sx={{height:"20em",display:"flex",alignItems:"center"}}>
+                        <img src={el.thumbnail_url} alt="smth" 
+                style={{height: "20em", width:"20em"}}
+                />
                      </Box> 
-                      <Box sx={{display:"flex",flexDirection:"column",justifySelf:"end"}}>
+                      <Box sx={{display:"flex",flexDirection:"column"}}>
 
-                        <Typography  >{el.product_title}</Typography>
-
-                      <Box sx={{alignSelf:"end",display:"flex",flexDirection:"row"}}>
-
-
-
-
-                      <Box>{ el.price}</Box>
+                      <Box 
+                  sx={{display:"flex",flexDirection:"row",
+                  }} >
+                        <Typography  variant="h5">{el.title}</Typography>
+                        <Typography>{ parseInt(el.price)}</Typography>
                       </Box>
+
+
+
+
+                      <Typography>{ el.description}</Typography>
                     </Box>
                   </Box>
                 </Card> 
               )
             }
+          </Grid>
         </Container>
-        </div>
+        </Box>
       ):(
         <Container maxWidth="sm"> 
 
