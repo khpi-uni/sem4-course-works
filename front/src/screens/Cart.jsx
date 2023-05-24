@@ -12,12 +12,15 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
+import {  useParams } from 'react-router-dom'
 
 
 async function parseJson(){
-  const data = await fetch("../../tmp_json/orders.json").then((response)=>response.json());
 
-  return data.orders;
+
+  const { json_cart } = useParams();
+  console.log(json_cart);
+  return json_cart;
 }
 
 

@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/account" element={<Account/>} />
           <Route exact path="/" element={<Index/>} />
           <Route exact path="/payment" element={<Payment/>} /> 
-          <Route exact path="/cart" element={<Cart/>} />
+          <Route  path="/cart/:json_cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />
           <Route exact path="/signup" element={<SignUp/>} />

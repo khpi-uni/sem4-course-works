@@ -17,17 +17,22 @@ import {API_HOST, saveToken} from "../api.js";
 
 const Index = () => {
   const [products, setProducts] = useState(null);
-  const [cartArray, setCartArray] = useState(null);
+  const [cartArray, setCartArray] = useState([]);
+  
+  const [cartLink,setCartLink] = useState("/cart/");
 
   const handleCartClick = (i)=>{
    if(!cartArray.includes(i)){
      cartArray.push(i);
-     setCartArray(JSON.parse(JSON.stringify(cartArray)));
    } 
+    console.log(i);
 
     writeCartItems("../../tmp_json/orders.json",products.filter((el,i)=>cartArray.includes(i)));
   }
   const writeCartItems = (file_name, json_obj) => {
+    console.log(json_obj);
+    console.log(JSON.stringify(json_obj));
+    setCartLink(JSON.stringify(json_obj));
   }
 
   useEffect(() => {
@@ -39,12 +44,13 @@ const Index = () => {
       console.log(await json_resp);
 
 
+      console.log(cartLink);
       setProducts(await json_resp.products)
     })()
   }, [])
   return (
 <div>
-  <Navbar/> 
+  <Navbar cart_link={{cartLink}}/> 
     <Typography variant="h4" sx={{textAlign:"center",margin:"1em 0"}}>
       Welcome to the shop!
     </Typography> 
@@ -79,7 +85,7 @@ const Index = () => {
                     </Box>
                 <Box  sx={{textAlign:"end"}}>
     <Button variant="contained"
-                onClick={handleCartClick}
+                onClick={()=>handleCartClick(i)}
     sx={{textDecoration:'none',margin:"1em",minWidth:"32px",maxWidth:"32px",borderRadius:"50%"  }}
     
     ><CartIcon sx={{}} fontSize="small"/></Button>

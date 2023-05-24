@@ -11,7 +11,12 @@ import Container from '@mui/material/Container'
 import SpaIcon from '@mui/icons-material/Spa';
 import CartIcon from '@mui/icons-material/ShoppingCart';
 
-const Navbar = () =>{
+
+const Navbar = (props) =>{
+
+  const cart_link = props.cart_link?JSON.stringify(props.cart_link):"cart/";
+  console.log((cart_link));
+
   return (
 
     <Box sx={{ flexGrow: 1 }}>
@@ -54,7 +59,7 @@ const Navbar = () =>{
     >Log in</Button>
 
     <Button variant="contained"
-    component="a" href="cart"
+    component="a" href={{cart_link}}
     sx={{textDecoration:'none',margin:"1em"  }}
     
     >Cart<CartIcon sx={{margin:"0 2px"}} fontSize="small"/></Button>
