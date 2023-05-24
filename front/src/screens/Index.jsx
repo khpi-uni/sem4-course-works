@@ -22,10 +22,11 @@ const Index = () => {
     (async () => {
       const response = await fetch(`${API_HOST}/product/get-all`
       )
-      console.log(response);
+      const json_resp = await response.json();
+      console.log(await json_resp);
 
 
-      setProducts(await response.json())
+      setProducts(await json_resp.products)
     })()
   }, [])
   return (
@@ -42,7 +43,7 @@ const Index = () => {
               products.map((el,i)=>
                 <Card sx={{padding:"0em"}} className="prod-card" key={i}>
 
-                  <ListItemButton sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
+                  <Box sx={{height:"10em",display:"flex",justifyContent:"space-between"}}>
                       <Box sx={{height:"5em",width:"5em",display:"flex",alignItems:"center"}}>
                         <img src={el.image} alt="smth" style={{maxWidth: "100%"}}/>
                      </Box> 
@@ -52,17 +53,13 @@ const Index = () => {
 
                       <Box sx={{alignSelf:"end",display:"flex",flexDirection:"row"}}>
 
-                     <Box  variant="subtitle2">{el.price + " ✖️ " } </Box>
-
-                      <Box sx={{padding:"0 1em ",display:"flex"}}>
-                        <Box  variant="subtitle2">{ el.amount} </Box>
-                      </Box>
 
 
-                      <Box>{  " 🟰 " + el.amount*el.price}</Box>
+
+                      <Box>{ el.price}</Box>
                       </Box>
                     </Box>
-                  </ListItemButton>
+                  </Box>
                 </Card> 
               )
             }
