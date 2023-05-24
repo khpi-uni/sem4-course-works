@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-import {Link, redirect} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import * as React from 'react';
 import {useState} from 'react';
@@ -24,6 +24,7 @@ const SignIn = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [formError, setFormError] = useState('')
+    const navigate = useNavigate();
 
     const signIn = async (e) => {
         e.preventDefault();
@@ -64,19 +65,15 @@ const SignIn = () => {
         if (data.message) {
             setFormError(data.message)
             return;
-        } else {
-            setFormError('Unknown error occurred')
-            return;
         }
+
 
         if (data.token) {
             saveToken(data.token);
+            navigate('/account');
         } else {
             setFormError('Unknown error occurred')
-            return;
         }
-
-        redirect('/');
     }
 
     return (<>
