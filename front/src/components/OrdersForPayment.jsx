@@ -161,6 +161,6 @@ const OrdersForPayment = (props) =>{
         <Typography variant="h5">There are currently no orders!</Typography>
       </Card>
     </Container>
-  )
-  )}
+  ))
+}
 export default OrdersForPayment;
