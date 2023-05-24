@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
+import CartIcon from '@mui/icons-material/ShoppingCart';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -45,13 +46,13 @@ const Index = () => {
               products.map((el,i)=>
                 <Card xs={8} sx={{maxWidth:"29%", padding:"0.5em", margin: 1}} variant="outlined" className="prod-card" key={i}>
 
-                  <Box sx={{height:"32em",display:"flex", flexDirection:"column"}} >
+                  <Box sx={{height:"32em",display:"flex", flexDirection:"column", justifyContent:"space-between"}} >
                       <Box sx={{height:"20em",display:"flex",alignItems:"center"}}>
                         <img src={el.thumbnail_url} alt="smth" 
                 style={{height: "20em", width:"20em"}}
                 />
                      </Box> 
-                      <Box sx={{display:"flex",flexDirection:"column"}}>
+                      <Box sx={{display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
 
                       <Box 
                   sx={{display:"flex",flexDirection:"row",justifyContent:"space-between",margin:1
@@ -65,6 +66,13 @@ const Index = () => {
 
                       <Typography>{ el.description}</Typography>
                     </Box>
+                <Box  sx={{textAlign:"end"}}>
+    <Button variant="contained"
+    sx={{textDecoration:'none',margin:"1em",minWidth:"32px",maxWidth:"32px",borderRadius:"50%"  }}
+    
+    ><CartIcon sx={{}} fontSize="small"/></Button>
+                </Box>
+                  
                   </Box>
                 </Card> 
               )
