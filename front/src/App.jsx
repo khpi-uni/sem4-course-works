@@ -10,6 +10,7 @@ import Cart from './screens/Cart'
 import Orders from './components/Orders'
 import Section from './Section'
 import Payment from './screens/Payment'
+import Admin from './screens/Admin'
 import Index from './screens/Index'
 
 function App() {
@@ -21,8 +22,9 @@ function App() {
     <Router>
       <main className="app">
         <Routes>
-          <Route exact path="/account" element={<Account/>} />
           <Route exact path="/" element={<Index/>} />
+          <Route exact path="/account" element={<Account/>} />
+          <Route exact path="/admin" element={<Admin/>} />
           <Route exact path="/payment" element={<Payment/>} /> 
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
