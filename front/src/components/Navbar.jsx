@@ -14,7 +14,7 @@ import CartIcon from '@mui/icons-material/ShoppingCart';
 const Navbar = () =>{
   return (
 
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
     <AppBar position="static">
     <Toolbar variant="dense">
     <Container maxWidth="xl"> 
