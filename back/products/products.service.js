@@ -1,4 +1,4 @@
-import {findProductById, retrieveAllProducts} from "./helpers/products.js";
+import {findProductById, processProducts, retrieveAllProducts} from "./helpers/products.js";
 import {db} from "../db.js";
 
 export const getAllProducts = async (req, res) => {
@@ -13,8 +13,9 @@ export const getAllProducts = async (req, res) => {
         return;
     }
 
+
     res.send({
-        products: productsObj.products
+        products: await processProducts(productsObj.products)
     })
 }
 

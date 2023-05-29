@@ -1,4 +1,5 @@
 import {db} from "../../db.js";
+import {getMediaUrlById} from "../../media/media.js";
 
 export const retrieveAllProducts = () => {
     let sqlQuery = 'SELECT * FROM products';
@@ -44,7 +45,6 @@ export const getProductPriceById = async (id) => {
 }
 
 export const getTotal = async (orderInfo) => {
-    console.log(orderInfo)
     if(!orderInfo) {
         return 0;
     }
@@ -60,4 +60,18 @@ export const getTotal = async (orderInfo) => {
     }
 
     return total;
+}
+
+export const processProducts = async (products) => {
+
+    for(const product of products) {
+        const {thumbnail_id: thumbnailId} = product;
+        if(!thumbnailId) {
+            return;
+        }
+
+        product.thumbnail_url = await getMediaUrlById(thumbnailId);
+    }
+
+    return products;
 }
