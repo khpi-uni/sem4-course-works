@@ -10,8 +10,9 @@ import Cart from './screens/Cart'
 import Orders from './components/Orders'
 import Section from './Section'
 import Payment from './screens/Payment'
-import Admin from './screens/Admin'
+import AdminUser from './screens/AdminUser.jsx'
 import Index from './screens/Index'
+import AdminOrders from "./screens/AdminOrders.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,8 +25,9 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Index/>} />
           <Route exact path="/account" element={<Account/>} />
-          <Route exact path="/admin" element={<Admin/>} />
-          <Route exact path="/payment" element={<Payment/>} /> 
+          <Route exact path="/admin/users" element={<AdminUser/>} />
+          <Route exact path="/admin/orders" element={<AdminOrders/>} />
+          <Route exact path="/payment" element={<Payment/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />
           <Route exact path="/thanks" element={<Thanks/>} />

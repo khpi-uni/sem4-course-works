@@ -11,15 +11,14 @@ import Container from '@mui/material/Container';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {Checkbox} from "@mui/material";
 
 function DataGridDemo() {
-    const [usersInfo, setUsersInfo] = useState([]);
+    const [ordersInfo, setOrdersInfo] = useState([]);
 
     useEffect(() => {
         // check if we have token
         (async () => {
-            const response = await fetch(`${API_HOST}/user/get-all`, {
+            const response = await fetch(`${API_HOST}/order/get-all`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -27,47 +26,36 @@ function DataGridDemo() {
 
             const data = await response.json();
 
-            setUsersInfo(data.users);
+            setOrdersInfo(Object.values(data));
         })()
     }, [])
 
     const columns = [
         {
-            field: "id",
+            field: "orderId",
             headerName: "ID",
         },
         {
-            field: "email",
-            headerName: "Email",
-            width: 250
+            field: "userId",
+            headerName: "User id",
         },
         {
-            field: "shipping_address",
-            headerName: "Shipping Address",
-            width: 150,
+            field: "status",
+            headerName: "Status",
             editable: true,
+            type: "singleSelect",
+            valueOptions: ["new", "declined", "in progress", "completed (sale)"],
+            width: 250,
+
         },
         {
-            field: "billing_address",
-            headerName: "Billing Address",
-            width: 150,
-            editable: true
+            field: "total",
+            headerName: "Total",
         },
         {
-            field: "role",
-            headerName: "Role",
-            editable: true
-        },
-        {
-            field: "is_blacklisted",
-            headerName: "Blacklisted",
-            renderCell: (data) => {
-                const isBlacklisted = data.formattedValue; // 0 || 1
-                return (
-                    <Checkbox defaultChecked={!!isBlacklisted}
-                              onChange={(e) => sendEditRequest({is_blacklisted: e.target.checked, email: data.row.email})}/>
-                )
-            }
+            field: "createdAt",
+            headerName: "Created at",
+            width: 200
         },
         {
             headerName: "Delete",
@@ -77,43 +65,37 @@ function DataGridDemo() {
 
     function renderDeleteButton(data) {
         return (
-            <Button variant="contained" color="error" onClick={sendDeleteUserRequest.bind(null, data.row.email)}>Delete</Button>
+            <Button variant="contained" color="error" onClick={sendDeleteOrderRequest.bind(null, data.row.orderId)}>Delete</Button>
         );
     }
 
-    async function sendEditRequest(newData) {
+    async function sendStatusChangeRequest(id, status) {
         const myHeaders = new Headers();
 
         myHeaders.append('Authorization', `Bearer ${getToken()}`)
-
         const urlencoded = new URLSearchParams();
-        urlencoded.append("email", newData?.email);
-        urlencoded.append("shippingAddress", newData?.shipping_address);
-        urlencoded.append("billingAddress", newData?.billing_address);
-        urlencoded.append("blacklistStatus", newData?.is_blacklisted);
-        urlencoded.append("role", newData?.role);
+        urlencoded.append("id", id);
+        urlencoded.append('status', status);
 
-        const requestOptions = {
-            method: 'PATCH', headers: myHeaders, body: urlencoded,
-        };
+        console.log(id, status);
 
-        const response = await fetch(`${API_HOST}/user/edit`, requestOptions);
+        const response = await fetch(`${API_HOST}/order/update-status`, {
+            method: "POST",
+            headers: myHeaders,
+            body: urlencoded
+        });
 
-        const data = await response.json();
-
-        if (data.error) {
-            alert(data.error);
-        }
+        console.log(await response.json());
     }
 
-    async function sendDeleteUserRequest(email) {
+    async function sendDeleteOrderRequest(orderId) {
         const myHeaders = new Headers();
 
         myHeaders.append('Authorization', `Bearer ${getToken()}`)
         const urlencoded = new URLSearchParams();
-        urlencoded.append("email", email);
+        urlencoded.append("id", orderId);
 
-        const response = await fetch(`${API_HOST}/user/delete`, {
+        const response = await fetch(`${API_HOST}/order`, {
             method: "DELETE",
             headers: myHeaders,
             body: urlencoded
@@ -121,19 +103,20 @@ function DataGridDemo() {
 
         // If deletion is successful, remove the deleted user from the state
         if (response.ok) {
-            setUsersInfo(prevState => prevState.filter(user => user.email !== email));
+            setOrdersInfo(prevState => prevState.filter(order => order.orderId !== orderId));
         } else {
             // Handle error here, alert or similar
-            console.error('Failed to delete user');
+            console.error('Failed to delete order');
         }
     }
 
     return (
-        usersInfo.length > 0 ?
+        ordersInfo.length > 0 ?
             <Box sx={{width: '100%'}}>
                 <DataGrid
-                    rows={usersInfo}
+                    rows={ordersInfo}
                     columns={columns}
+                    getRowId={(row) => row.orderId}
                     initialState={{
                         pagination: {
                             paginationModel: {
@@ -143,24 +126,26 @@ function DataGridDemo() {
                     }}
                     pageSizeOptions={[5]}
                     disableRowSelectionOnClick
-                    processRowUpdate={(newData) => sendEditRequest(newData)}
+                    processRowUpdate={(newData) => {
+                        sendStatusChangeRequest(newData.orderId, newData.status);
+                    }}
                     onProcessRowUpdateError={(e) => {
                         console.log(e)
                         console.log('ERROR')
                     }}
                 />
             </Box>
-            : <p>No userinfo</p>
+            : <p>No orders</p>
     );
 }
 
-const Admin = () => {
+const AdminOrders = () => {
 
     return (
         <div>
             <Navbar/>
             <Container sx={{margin: "25px auto"}}>
-                <Typography variant={"h4"} mb={1.5}>Users</Typography>
+                <Typography variant={"h4"} mb={1.5}>Orders</Typography>
                 <DataGridDemo/>
             </Container>
             <Footer/>
@@ -169,4 +154,4 @@ const Admin = () => {
 }
 
 
-export default Admin; 
+export default AdminOrders;

@@ -1,4 +1,9 @@
-import {findOrderById, processOrderWithProducts, retrieveOrderWithItemsById} from "./helpers/order.js";
+import {
+    findOrderById, processArrayOrders,
+    processOrderWithProducts,
+    retrieveAllOrdersForUserById, retrieveAllOrdersWithItems,
+    retrieveOrderWithItemsById
+} from "./helpers/order.js";
 import {getTotal} from "../products/helpers/products.js";
 import {db} from "../db.js";
 
@@ -24,11 +29,82 @@ export const getOrder = async (req, res) => {
         return;
     }
 
-    console.log()
-
     res.send({
         ...processOrderWithProducts(response.orders)
     })
+}
+
+export const getAllOrders = async (req, res) => {
+    const response = await retrieveAllOrdersWithItems();
+
+    if (response.error) {
+        res.status(400).send({
+            error: response.error,
+            orders: null
+        })
+
+        return;
+    }
+
+    res.send({
+        ...processArrayOrders(response.orders)
+    })
+}
+
+export const updateOrderStatus = async (req, res) => {
+    const {id, status} = req.body;
+    const allowedStatuses = ['new', 'in progress', 'declined', 'completed (sale)'];
+
+    if (!id) {
+        res.status(400).send({
+            error: 'id is required'
+        });
+
+        return;
+    }
+
+    if (!status) {
+        res.status(400).send({
+            error: 'status is required'
+        });
+
+        return;
+    }
+
+    if(!allowedStatuses.includes(status)) {
+        res.status(400).send({
+            error: 'Invalid status. Valid statuses: ' + allowedStatuses.join(', ')
+        })
+    }
+
+    const candidate = await findOrderById(id);
+
+    if (!candidate) {
+        res.status(400).send({
+            error: 'order with this id does not exist'
+        });
+
+        return;
+    }
+
+    let sqlQuery = "UPDATE orders SET status=? WHERE id=?";
+
+    db.query(sqlQuery, [status, id], (err, results) => {
+        if(err) {
+            res.status(400).send({
+                error: err
+            });
+
+            return;
+        }
+
+        res.send({
+            status: 'success',
+            message: 'successfully updated status',
+            results
+        })
+    })
+
 }
 
 export const createOrder = async (req, res) => {
@@ -84,8 +160,6 @@ export const deleteOrder = async (req, res) => {
     }
 
     const candidate = await findOrderById(id);
-
-    console.log(candidate);
 
     if (!candidate.order) {
         res.status(400).send({

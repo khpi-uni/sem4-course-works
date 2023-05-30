@@ -10,61 +10,52 @@ import Container from '@mui/material/Container'
 
 import SpaIcon from '@mui/icons-material/Spa';
 import CartIcon from '@mui/icons-material/ShoppingCart';
+import {Link} from "react-router-dom";
 
-const Navbar = () =>{
-  return (
+const Navbar = () => {
+    return (
 
-    <Box>
-    <AppBar position="static">
-    <Toolbar variant="dense">
-    <Container maxWidth="xl"> 
+        <Box>
+            <AppBar position="static">
+                <Toolbar variant="dense">
+                    <Container maxWidth="xl">
+                        <Box
+                            sx={{justifyContent: "space-between", display: "flex"}}
+                        >
+                                <IconButton color="inherit" aria-label="menu" component={Link} to={'/'}
+                                            sx={{textDecoration: 'none', mr: 2}}>
+                                    <SpaIcon
+                                        sx={{display: {xs: 'none', sm: 'block'}}}/>
+                                </IconButton>
+                            <Box>
 
-    <Box
-    sx={{justifyContent:"space-between",display:"flex"}}
-    >
-    <IconButton  color="inherit" aria-label="menu" 
-    component="a" href="/"
-    sx={{textDecoration:'none',mr:2  }}>
-    <SpaIcon 
-    sx={{  display: { xs: 'none', sm: 'block' } }} />
-    </IconButton>
+                                <Typography variant="h6" color="inherit" component={Link} to="/"
 
-    <Box>
-    <Typography variant="h6" color="inherit" component="a" href="/"
+                                            sx={{textDecoration: 'none',}}
+                                >
+                                    Products
+                                </Typography>
 
-    sx={{textDecoration:'none',  }}
-    >
-    Products
-    </Typography>
 
-    <Typography variant="h6" color="inherit" 
+                                <Link to={'/signup'}><Button variant="contained"
+                                                             sx={{textDecoration: 'none', margin: "1em"}}>Sign
+                                    up</Button></Link>
+                                <Link to={'/signin'}><Button variant="contained"
+                                                             sx={{textDecoration: 'none', margin: "1em"}}>Sign
+                                    in</Button></Link>
 
-    component="a" href="about"
-    sx={{textDecoration:'none',margin:"1em"  }}
-    >About us
-    </Typography>
+                                <Button variant="contained"
+                                        component={Link} to="/cart"
+                                        sx={{textDecoration: 'none', margin: "1em"}}
 
-    <Button variant="contained"
-    component="a" href="signup"
-    sx={{textDecoration:'none',margin:"1em"  }}
-    >Sign up</Button>
-    <Button variant="contained"
-    component="a" href="signin"
-    sx={{textDecoration:'none',margin:"1em"  }}
-    >Log in</Button>
-
-    <Button variant="contained"
-    component="a" href="cart"
-    sx={{textDecoration:'none',margin:"1em"  }}
-    
-    >Cart<CartIcon sx={{margin:"0 2px"}} fontSize="small"/></Button>
-    </Box>
-    </Box>
-    </Container>
-    </Toolbar>
-    </AppBar>
-    </Box>
-  ) 
+                                >Cart<CartIcon sx={{margin: "0 2px"}} fontSize="small"/></Button>
+                            </Box>
+                        </Box>
+                    </Container>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    )
 }
 
 export default Navbar; 

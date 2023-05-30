@@ -15,6 +15,20 @@ export const retrieveAllOrdersForUserById = (id) => {
     });
 }
 
+export const retrieveAllOrdersWithItems = () => {
+    let sqlQuery = 'SELECT orders.id AS `order_id`, orders.user_id, orders.status, orders.total, orders.created_at, products.id AS `product_id`, products.title, order_items.amount FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id LEFT JOIN products ON order_items.id = products.id';
+
+    return new Promise((resolve, reject) => {
+        db.query(sqlQuery, [], (err, results) => {
+            if (err) {
+                reject({error: err, order: null});
+            } else {
+                resolve({orders: results});
+            }
+        });
+    });
+}
+
 export const retrieveOrderWithItemsById = (id) => {
     if (!id) {
         return null;
@@ -56,6 +70,8 @@ export const processOrderWithProducts = (orderWithProducts) => {
         return null;
     }
 
+    console.log(orderWithProducts)
+
     if (!Array.isArray(orderWithProducts)) {
         return null;
     }
@@ -85,7 +101,7 @@ export const processOrderWithProducts = (orderWithProducts) => {
     return orderData;
 }
 
-export const processOrdersOfUser = (orders) => {
+export const processArrayOrders = (orders) => {
     if (!orders) {
         return null;
     }
@@ -108,7 +124,7 @@ export const processOrdersOfUser = (orders) => {
                 userId: order.user_id,
                 status: order.status,
                 total: order.total,
-                createdAt: order.createdAt,
+                createdAt: order.created_at,
                 products: []
             }
         }

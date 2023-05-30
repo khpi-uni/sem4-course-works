@@ -2,7 +2,7 @@ import {findUserByEmail, omitPassword, retrieveAllUsers} from "./helpers/user.js
 import {db} from "../db.js";
 import {hashPassword} from "../auth/helpers/password.js";
 import {
-    processOrdersOfUser,
+    processArrayOrders,
     processOrderWithProducts,
     retrieveAllOrdersForUserById,
     retrieveOrdersWithItemsByUserId
@@ -245,7 +245,7 @@ export const getOrdersOfUser = async (req, res) => {
         return;
     }
 
-    res.send(processOrdersOfUser(response.orders))
+    res.send(processArrayOrders(response.orders))
 }
 
 export const getCurrentUserOrders = async (req, res) => {
@@ -267,5 +267,5 @@ export const getCurrentUserOrders = async (req, res) => {
         return;
     }
 
-    res.send(processOrdersOfUser(response.orders))
+    res.send(processArrayOrders(response.orders))
 }
