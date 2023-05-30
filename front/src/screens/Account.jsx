@@ -18,8 +18,6 @@ import TabPanel from '@mui/lab/TabPanel';
 import {useEffect, useState} from "react";
 import {API_HOST} from "../api.js";
 
-
-
 const Forms = ()=>{
   const [value, setValue] = React.useState('1');
   const [userInfo, setUserInfo] = useState(null);
@@ -46,7 +44,6 @@ const Forms = ()=>{
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label="Account info" value="1" />
-              <Tab label="My Orders" value="2" />
             </TabList>
           </Box>
           <TabPanel value="1">
@@ -57,9 +54,6 @@ const Forms = ()=>{
 
             <Typography  mt="1em" >{"Your shipping address: "+ userInfo.shipping_address}</Typography>
 
-          </TabPanel>
-          <TabPanel value="2">
-            <Orders/>
           </TabPanel>
         </TabContext>
       </Box>}
