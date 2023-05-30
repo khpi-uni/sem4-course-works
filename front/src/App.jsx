@@ -13,6 +13,7 @@ import Payment from './screens/Payment'
 import AdminUser from './screens/AdminUser.jsx'
 import Index from './screens/Index'
 import AdminOrders from "./screens/AdminOrders.jsx";
+import AdminProducts from "./screens/AdminProducts.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/account" element={<Account/>} />
           <Route exact path="/admin/users" element={<AdminUser/>} />
           <Route exact path="/admin/orders" element={<AdminOrders/>} />
+          <Route exact path="/admin/products" element={<AdminProducts/>} />
           <Route exact path="/payment" element={<Payment/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/orders" element={<Orders/>} />

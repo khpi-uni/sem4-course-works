@@ -1,5 +1,6 @@
 import {findProductById, processProducts, retrieveAllProducts} from "./helpers/products.js";
 import {db} from "../db.js";
+import {getMediaIdByUrlOrInsert} from "../media/media.js";
 
 export const getAllProducts = async (req, res) => {
     const productsObj = await retrieveAllProducts();
@@ -20,7 +21,7 @@ export const getAllProducts = async (req, res) => {
 }
 
 export const createProduct = async (req, res) => {
-    let {title, price, description, inStock, thumbnailId} = req.body;
+    let {title, price, description, inStock, thumbnailURL} = req.body;
 
     if (!title) {
         res.status(400).send({
@@ -42,14 +43,16 @@ export const createProduct = async (req, res) => {
         inStock = 0;
     }
 
-    if (inStock === false) {
+    if (inStock === 'true') {
+        inStock = 1;
+    } else {
         inStock = 0;
     }
 
-    if (inStock === true) {
-        inStock = 1;
+    let thumbnailId = null;
+    if (thumbnailURL) {
+        thumbnailId = await getMediaIdByUrlOrInsert(thumbnailURL);
     }
-
 
     let sqlQuery = 'INSERT INTO products (created_by_id, title, price, description, in_stock, thumbnail_id) VALUES (?, ?, ?, ?, ?, ?)';
 
@@ -98,8 +101,23 @@ export const editProduct = async (req, res) => {
         title: newTitle,
         description: newDescription,
         inStock: newInStock,
-        thumbnailId: newThumbnailId,
+        thumbnailUrl: newThumbnailUrl,
     } = req.body;
+
+    if (newInStock === 'true') {
+        newInStock = 1;
+    } else {
+        newInStock = 0;
+    }
+
+    // logic to get new thumbnail id
+    let newThumbnailId = null;
+
+    if (newThumbnailUrl) {
+        newThumbnailId = await getMediaIdByUrlOrInsert(newThumbnailUrl);
+    }
+
+    console.log(newPrice, typeof newPrice);
 
     const updatedProduct = {
         createdBy: newCreatedBy ?? product.created_by_id,
@@ -109,6 +127,8 @@ export const editProduct = async (req, res) => {
         inStock: newInStock ?? product.in_stock,
         thumbnailId: newThumbnailId ?? product.thumbnail_id,
     };
+
+    console.log(updatedProduct)
 
     let sqlQuery = 'UPDATE products SET created_by_id = ?, price = ?, title = ?, description = ?, in_stock = ?, thumbnail_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?';
 
