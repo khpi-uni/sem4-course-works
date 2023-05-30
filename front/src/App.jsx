@@ -16,8 +16,6 @@ import AdminOrders from "./screens/AdminOrders.jsx";
 import AdminProducts from "./screens/AdminProducts.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div id="root">
         <Section auth={1}>
