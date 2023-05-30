@@ -97,6 +97,12 @@ export const editUser = async (req, res) => {
         newRole = null;
     }
 
+    if(newBlacklistStatus === 'true') {
+        newBlacklistStatus = 1;
+    } else {
+        newBlacklistStatus = 0;
+    }
+
     const newUser = {
         email: newEmail ?? candidate.email,
         password: newPassword ? hashPassword(newPassword) : candidate.password,
