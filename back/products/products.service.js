@@ -1,9 +1,37 @@
-import {findProductById, processProducts, retrieveAllProducts} from "./helpers/products.js";
+import {findProductById, processProducts, retrieveAllProducts, retrieveAllProductsByIds} from "./helpers/products.js";
 import {db} from "../db.js";
 import {getMediaIdByUrlOrInsert} from "../media/media.js";
 
 export const getAllProducts = async (req, res) => {
     const productsObj = await retrieveAllProducts();
+
+    if (productsObj.hasOwnProperty('error') && productsObj.error) {
+        res.statusCode(500).send({
+            error: productsObj.error,
+            users: null
+        })
+
+        return;
+    }
+
+
+    res.send({
+        products: await processProducts(productsObj.products)
+    })
+}
+
+export const getProductsByIds = async (req, res) => {
+    const {ids} = req.query;
+    if (!ids) {
+        res.status(400).send({
+            error: 'Please provide ids of products that you want to get'
+        })
+
+        return;
+    }
+
+        const productsObj = await retrieveAllProductsByIds(ids);
+
 
     if (productsObj.hasOwnProperty('error') && productsObj.error) {
         res.statusCode(500).send({

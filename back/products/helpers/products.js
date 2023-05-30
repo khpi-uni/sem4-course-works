@@ -16,6 +16,27 @@ export const retrieveAllProducts = () => {
     });
 }
 
+export const retrieveAllProductsByIds = (ids) => {
+    // Split the string into an array of individual IDs
+    const idArray = ids.split(',').map(id => id.trim());
+
+    let placeholders = idArray.map(() => '?').join(', ');
+    let sqlQuery = `SELECT * FROM products WHERE id IN (${placeholders})`;
+
+    return new Promise((resolve, reject) => {
+        db.query(sqlQuery, idArray, (err, results) => {
+            if (err) {
+                reject({ error: err, products: null });
+            } else if (!Array.isArray(results)) {
+                reject({ error: 'Database did not return array for products', products: null });
+            } else {
+                resolve({ products: results });
+            }
+        });
+    });
+}
+
+
 export const findProductById = async (id) => {
     if (!id) {
         return null;
@@ -56,7 +77,7 @@ export const getTotal = async (orderInfo) => {
     let total = 0;
 
     for(let orderInfoItem of orderInfo) {
-        total += await getProductPriceById(orderInfoItem.productId) * orderInfoItem.amount;
+        total += await getProductPriceById(orderInfoItem.id) * orderInfoItem.amount;
     }
 
     return total;

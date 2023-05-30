@@ -1,4 +1,3 @@
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -13,6 +12,7 @@ import Footer from '../components/Footer';
 import * as React from 'react';
 import {useState, useEffect} from "react";
 import {API_HOST, saveToken} from "../api.js";
+import {ProductCard} from "../components/ProductCard.jsx";
 
 const Index = () => {
     const [products, setProducts] = useState(null);
@@ -35,8 +35,6 @@ const Index = () => {
             const response = await fetch(`${API_HOST}/product/get-all`
             )
             const json_resp = await response.json();
-            console.log(await json_resp);
-
 
             setProducts(await json_resp.products)
         })()
@@ -54,56 +52,7 @@ const Index = () => {
                             <Grid container spacing={1}>
                                 {
                                     products.map((el, i) =>
-                                        <Card xs={8} sx={{maxWidth: "29%", padding: "0.5em", margin: 1}}
-                                              variant="outlined" className="prod-card" key={i}>
-
-                                            <Box sx={{
-                                                height: "32em",
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                justifyContent: "space-between"
-                                            }}>
-                                                <Box sx={{height: "20em", display: "flex", alignItems: "center"}}>
-                                                    <img src={el.thumbnail_url} alt="smth"
-                                                         style={{height: "20em", width: "20em"}}
-                                                    />
-                                                </Box>
-                                                <Box sx={{
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    justifyContent: "space-between"
-                                                }}>
-
-                                                    <Box
-                                                        sx={{
-                                                            display: "flex",
-                                                            flexDirection: "row",
-                                                            justifyContent: "space-between",
-                                                            margin: 1
-                                                        }}>
-                                                        <Typography variant="h5">{el.title}</Typography>
-                                                        <Typography>{parseInt(el.price * 100) / 100.0}</Typography>
-                                                    </Box>
-
-
-                                                    <Typography>{el.description}</Typography>
-                                                </Box>
-                                                <Box sx={{textAlign: "end"}}>
-                                                    <Button variant="contained"
-                                                            onClick={handleCartClick}
-                                                            sx={{
-                                                                textDecoration: 'none',
-                                                                margin: "1em",
-                                                                minWidth: "32px",
-                                                                maxWidth: "32px",
-                                                                borderRadius: "50%"
-                                                            }}
-
-                                                    ><CartIcon sx={{}} fontSize="small"/></Button>
-                                                </Box>
-
-                                            </Box>
-                                        </Card>
+                                        <ProductCard id={el.id} title={el.title} price={el.price} description={el.description} imageURL={el.thumbnail_url} key={i} />
                                     )
                                 }
                             </Grid>

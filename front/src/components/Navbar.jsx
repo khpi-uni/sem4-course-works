@@ -11,12 +11,17 @@ import Container from '@mui/material/Container'
 import SpaIcon from '@mui/icons-material/Spa';
 import CartIcon from '@mui/icons-material/ShoppingCart';
 import {Link} from "react-router-dom";
+import {Badge} from "@mui/material";
+import {useContext} from "react";
+import {CartContext} from "../App.jsx";
 
 const Navbar = () => {
+    const cartContext = useContext(CartContext);
+
     return (
 
         <Box>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar variant="dense">
                     <Container maxWidth="xl">
                         <Box
@@ -44,11 +49,13 @@ const Navbar = () => {
                                                              sx={{textDecoration: 'none', margin: "1em"}}>Sign
                                     in</Button></Link>
 
-                                <Button variant="contained"
-                                        component={Link} to="/cart"
-                                        sx={{textDecoration: 'none', margin: "1em"}}
+                                <Badge badgeContent={cartContext.getNumberOfItems()}>
+                                    <Button variant="contained"
+                                            component={Link} to="/cart"
+                                            sx={{textDecoration: 'none'}}
 
-                                >Cart<CartIcon sx={{margin: "0 2px"}} fontSize="small"/></Button>
+                                    >Cart<CartIcon sx={{margin: "0 2px"}} fontSize="small"/></Button>
+                                </Badge>
                             </Box>
                         </Box>
                     </Container>

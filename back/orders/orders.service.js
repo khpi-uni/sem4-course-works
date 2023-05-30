@@ -192,7 +192,7 @@ async function addOrderItemsToOrder(orderId, orderInfo) {
     for (let order of orderInfo) {
         let sqlQuery = 'INSERT INTO order_items (order_id, product_id, amount) VALUES (?, ?, ?)'
         await new Promise((resolve) => {
-            db.query(sqlQuery, [orderId, order.productId, order.amount], (err) => {
+            db.query(sqlQuery, [orderId, order.id, order.amount], (err) => {
                 if (err) {
                     throw new Error(err);
                 }
